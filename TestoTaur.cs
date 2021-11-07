@@ -21,11 +21,14 @@ namespace TheGame001
         Random rnd = new Random();
         public (int, int) myCurrent = (0,0) ;
         int timesInvoked = 0;
-
+        // int val=0;
+        int val = 0;
         // myCurrent.Item1=något  // VARFÖR FUNKAR INTE DETTA?!?
         public List<(int, int)> Path = new List<(int, int)>();
         public Queue<(int, int)> MyPath = new Queue<(int, int)>();
-
+        private int[] array = new int[50000];
+        private int count = 0;
+        
         public override void Move(Game myGame, Player player)
         {
             timesInvoked++;
@@ -88,14 +91,27 @@ namespace TheGame001
                 {
                     visited[current.Item1, current.Item2] = true;
 
-
+                    count++;
 
                     if (current.Item1 == player.Position[0] && current.Item2 == player.Position[1])
                     {
                         found = true;
                     }
-
-                    int val = rnd.Next(1, 5);
+                    
+                    
+                    
+                    
+                    
+                    
+                    int zal = rnd.Next(-2, 2);
+                    int qal = rnd.Next(-2, 2);
+                    
+                    val++;
+                    val = ((val) % 5)+1;
+                    if (count > 49999) count = 0;
+                    val = array[count];
+                    // Console.WriteLine("val: "+val+" count: "+count);
+                    // Console.ReadLine();
                     switch (val)
                     {
                         case 1:
@@ -160,8 +176,23 @@ namespace TheGame001
                             }
 
                             break;
-              
+                                
+                            default:
+                                if (myGame.Labyrint[current.Item1 + zal, current.Item2+qal] == ' ' && visited[current.Item1 + 1, current.Item2] == false)
+                                {
+                                    visited[current.Item1 + zal, current.Item2 +qal] = true;
+                                    current.Item1 = current.Item1 + zal;
+                                    current.Item1 = current.Item2 + qal;
 
+                                    myCurrent = current;
+                                    if ( found == false)
+                                    {
+                                        Path.Add(current);
+                                    }
+                                    returnMe = Generate(current, player);
+                                }
+                                break;
+                                
                     }
       
                 }
@@ -186,7 +217,12 @@ namespace TheGame001
 
             public TestoTaur (string myName, char sign) : base(myName, sign)
             {
+                for (int i = 0; i < array.Length; i++)
+                {
+                    array[i] = rnd.Next(1, 5);
+                }
 
+                
 
 
 

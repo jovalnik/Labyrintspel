@@ -16,7 +16,7 @@ namespace TheGame001
         {
 
             //ConsoleHelper.SetCurrentFont("Consolas", 10);
-            ConsoleHelper.SetCurrentFont("Terminal", 8);                //Ville ha 8x8
+            // ConsoleHelper.SetCurrentFont("Terminal", 8);                //Ville ha 8x8
             Console.SetWindowSize(Console.LargestWindowWidth, Console.LargestWindowHeight);
 
             while (true)
